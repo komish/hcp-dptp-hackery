@@ -1,0 +1,13 @@
+ref:
+  as: hostedpipeline-preflight-common-aws
+  from_image:
+    namespace: opdev
+    name: preflight
+    tag: latest
+  commands: preflight-common-commands.sh
+  resources:
+    requests:
+      cpu: 100m
+      memory: 100Mi
+  documentation: |-
+    The preflight suite of tests.

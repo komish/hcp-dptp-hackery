@@ -1,0 +1,25 @@
+workflow:
+  as: hostedpipeline-preflight-common-claim
+  cluster_claim:
+    architecture: amd64
+    cloud: aws # needs to be a parameter
+    owner: openshift-ci
+    product: ocp
+    timeout: 1h0m0s # needs to be a parameter
+    version: "4.7" # needs to be a parameter
+  steps:
+    pre:
+    - ref: ipi-install-rbac #image registry access but I'm not sure we need it
+    test:
+    - ref: hostedpipeline-preflight-common-aws # TODO sync this with the step name
+    post:
+      # todo need to pull preflight artifacts?
+    - chain: gather
+  documentation: |- # TODO rewrite this
+    This workflows perform shared pre/post actions on clusters obtained from
+    preinstalled pools (https://docs.ci.openshift.org/docs/architecture/ci-operator/#testing-with-a-cluster-from-a-cluster-pool).
+    Claims a cluster with a default configuration on AWS and execute 
+    preflight suite of tests.
+    Important: Parameter values in `env` are supposed to be used only in rehearsals
+    and serve as "testing defaults". Production jobs should always override them
+    via `preflight-trigger`.
