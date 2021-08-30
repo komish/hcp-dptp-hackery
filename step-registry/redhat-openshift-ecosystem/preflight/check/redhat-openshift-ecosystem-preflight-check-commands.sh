@@ -1,6 +1,15 @@
 #!/usr/bin/env bash
 
-# TODO... make more robust.
+# This step will execute preflight against the provided asset.
+# https://github.com/redhat-openshift-ecosystem/openshift-preflight
+#
+# Expects env vars:
+#    PREFLIGHT_ASSET_TYPE:  The asset type, which correlates with the 
+#                           preflight policy that is to be executed.
+#                           Options: container, operator
+#    PREFLIGHT_TEST_ASSET:  The asset to test with the preflight utility.
+#                           Must include the registry and the tag/digest.
+#                           Ex. quay.io/example/some-container:0.0.1
 
 # Check for the expected asset types, or otherwise fail.
 rc=$([ "$PREFLIGHT_ASSET_TYPE" = "container" ] || [ "$PREFLIGHT_ASSET_TYPE" = "operator" ]; echo $?)
