@@ -3,8 +3,8 @@
 # TODO... make more robust.
 
 # Check for the expected asset types, or otherwise fail.
-rc={[ "$PREFLIGHT_ASSET_TYPE" = "container" ] || [ "$PREFLIGHT_ASSET_TYPE" = "operator" ]; echo $? ;}
-[ $rc -ne 0 ] && { echo "ERR An incorrect asset type was provided. Expecting 'container' or 'operator'."; exit 1}
+rc=$([ "$PREFLIGHT_ASSET_TYPE" = "container" ] || [ "$PREFLIGHT_ASSET_TYPE" = "operator" ]; echo $?)
+[ "$rc" -ne 0 ] && { echo "ERR An incorrect asset type was provided. Expecting 'container' or 'operator'."; exit 1 ;}
 
 echo "Starting demo execution of preflight..."
 
